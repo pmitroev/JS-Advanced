@@ -4,7 +4,7 @@ function solve(arr) {
         const hero = {
             name,
             level : Number(level),
-            item : items ? items.split(', ') : [],
+            items : items ? items.split(', ') : [],
         };
         acc.push(hero);
         return acc;
@@ -18,3 +18,6 @@ function solve(arr) {
 solve(['Isacc / 25 / Apple, GravityGun',
 'Derek / 12 / BarrelVest, DestructionSword',
 'Hes / 1 / Desolator, Sentinel, Antara'])
+
+
+// [{"name":"Isacc","level":25,"items":["Apple","GravityGun"]},{"name":"Derek","level":12,"items":["BarrelVest","DestructionSword"]},{"name":"Hes","level":1,"items":["Desolator","Sentinel","Antara"]}]
