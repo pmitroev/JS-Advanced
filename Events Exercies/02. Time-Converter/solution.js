@@ -1,35 +1,39 @@
 function attachEventsListeners() {
-    const buttons = document.querySelectorAll('input[type="button"]');
-    const daysInput = document.getElementById('days');
-    const hoursInput = document.getElementById('hours');
-    const minutesInput = document.getElementById('minutes');
-    const secondsInput = document.getElementById('seconds');
+    let days = document.getElementById('days');
+    let hours = document.getElementById('hours');
+    let minutes = document.getElementById('minutes');
+    let seconds = document.getElementById('seconds');
 
-    for (const button of buttons) {
-        button.addEventListener('click', convert);
+    let ration = {
+        days: 1,
+        hours: 24,
+        minutes: 1440,
+        seconds: 86400
+    };
+
+    document.getElementById('daysBtn').addEventListener('click', onClick);
+    document.getElementById('hoursBtn').addEventListener('click', onClick);
+    document.getElementById('minutesBtn').addEventListener('click', onClick);
+    document.getElementById('secondsBtn').addEventListener('click', onClick);
+
+    function convert(value, unit) {
+        let days = value / ration[unit];
+
+        return {
+            days : days,
+            hours : days * ration.hours,
+            minutes : days * ration.minutes,
+            seconds : days * ration.seconds
+        }
     }
 
-    function convert(event) {
-        const parentDivEl = event.target.parentElement;
-        const userInput = parentDivEl.querySelector('input[type="text"]');
-        const typeUnit = userInput.attributes.id.textContent;
+    function onClick(event) {
+        let input = event.target.parentElement.querySelector('input[type="text"]');
+        let time = convert(Number(input.value), input.id) 
 
-        if (typeUnit === 'days') {
-            hoursInput.value = Number(userInput.value) * 24;
-            minutesInput.value = Number(hoursInput.value) * 60;
-            secondsInput.value = Number(minutesInput.value) * 60;
-        } else if (typeUnit === 'hours') {
-            daysInput.value = Number(userInput.value) / 24;
-            minutesInput.value = Number(userInput.value) * 60;
-            secondsInput.value = Number(minutesInput.value) * 60;
-        } else if (typeUnit === 'minutes') {
-            hoursInput.value = Number(userInput.value) / 60;
-            daysInput.value = Number(hoursInput.value) / 24;
-            secondsInput.value = Number(userInput.value) * 60;
-        } else if (typeUnit === 'seconds') {
-            minutesInput.value = Number(userInput.value) / 60;
-            hoursInput.value = Number(minutesInput.value) / 60;
-            daysInput.value = Number(hoursInput.value) / 24;
-        }
+        days.value = time.days;
+        hours.value = time.hours;
+        minutes.value = time.minutes;
+        seconds.value = time.seconds;
     }
 }
