@@ -1,6 +1,6 @@
 function create(words) {
     let parent = document.getElementById('content');
-    
+    //
     let elements = words;
 
     for (let element of elements) {

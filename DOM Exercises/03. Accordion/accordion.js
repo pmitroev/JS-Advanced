@@ -1,6 +1,6 @@
 function toggle() {
     let button = document.querySelector('.button');
-    let extra = document.getElementById('extra');
+    let extra = document.getElementById('extra')
     
     if (button.textContent === 'More') {
         button.textContent = 'Less';
